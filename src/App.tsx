@@ -2,6 +2,8 @@ import '@mantine/core/styles.css';
 
 import { MantineProvider } from '@mantine/core';
 import { colorSchemeManager, theme } from './theme';
+import { BrowserRouter } from 'react-router';
+import { AppRoutes } from './routes';
 
 const App = () => {
 	return (
@@ -10,7 +12,9 @@ const App = () => {
 			defaultColorScheme="dark"
 			colorSchemeManager={colorSchemeManager}
 		>
-			Hello
+			<BrowserRouter>
+				<AppRoutes />
+			</BrowserRouter>
 		</MantineProvider>
 	);
 };
