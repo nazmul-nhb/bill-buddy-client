@@ -3,7 +3,7 @@ import { useState } from 'react';
 import AntdBreadcrumb from '../../components/AntdBreadcrumb';
 import CommonDrawer from '../../components/CommonDrawer';
 import IconifyIcon from '../../components/IconifyIcon';
-import AddExpense from './components/AddExpense';
+import AddExpense from './components/ExpenseForm';
 import ExpenseTable from './components/ExpenseTable';
 
 const Expenses = () => {

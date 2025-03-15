@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import dayjs, { type Dayjs } from 'dayjs';
 import isToday from 'dayjs/plugin/isToday';
 import isYesterday from 'dayjs/plugin/isYesterday';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -12,7 +12,7 @@ dayjs.extend(relativeTime);
  * @param input Date to format, either `Date` or `string` type.
  * @returns Formatted date.
  */
-export const formatDateOnly = (input: string | Date): string => {
+export const formatDateOnly = (input: string | Date | Dayjs): string => {
 	return dayjs(input).format('dddd, MMMM DD, YYYY');
 };
 
@@ -21,7 +21,7 @@ export const formatDateOnly = (input: string | Date): string => {
  * @param input Date to format, either `Date` or `string` type.
  * @returns Formatted time.
  */
-export const formatTimeOnly = (input: string | Date): string => {
+export const formatTimeOnly = (input: string | Date | Dayjs): string => {
 	return dayjs(input).format('hh:mm:ssa');
 };
 
@@ -30,7 +30,7 @@ export const formatTimeOnly = (input: string | Date): string => {
  * @param date Date to get time stamp from, either `Date` or `string` type.
  * @returns Time stamp in unix format.
  */
-export const getTimeStamp = (date: string | Date): number => {
+export const getTimeStamp = (date: string | Date | Dayjs): number => {
 	return dayjs(date).unix();
 };
 
@@ -39,7 +39,7 @@ export const getTimeStamp = (date: string | Date): number => {
  * @param input Date to format, either `Date` or `string` type.
  * @returns Formatted date and time.
  */
-export const formatDateTimeDynamic = (input: string | Date): string => {
+export const formatDateTimeDynamic = (input: string | Date | Dayjs): string => {
 	const now = dayjs();
 	const iDate = dayjs(input);
 
@@ -70,16 +70,13 @@ export const formatDateTimeDynamic = (input: string | Date): string => {
  * @param input Date from which age will be calculated, either `Date` or `string` type.
  * @returns Return current age in formatted string.
  */
-export const getCurrentAge = (input: string | Date): string => {
+export const getCurrentAge = (input: string | Date | Dayjs): string => {
 	const now = dayjs();
 	const iDate = dayjs(input);
 
 	const yearDiff = now.diff(iDate, 'year');
 	const monthDiff = now.diff(iDate.add(yearDiff, 'year'), 'month');
-	const dayDiff = now.diff(
-		iDate.add(yearDiff, 'year').add(monthDiff, 'month'),
-		'day'
-	);
+	const dayDiff = now.diff(iDate.add(yearDiff, 'year').add(monthDiff, 'month'), 'day');
 
 	const ageParts = [];
 

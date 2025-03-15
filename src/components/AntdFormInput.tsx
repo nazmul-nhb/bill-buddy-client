@@ -1,4 +1,3 @@
-import { Icon } from '@iconify/react';
 import type {
 	ColProps,
 	FormItemProps,
@@ -8,6 +7,7 @@ import type {
 } from 'antd';
 import { Button, Col, Form, Input, InputNumber, Select, Upload } from 'antd';
 import { type FC, type ReactNode } from 'react';
+import IconifyIcon from './IconifyIcon';
 
 interface AntdFormInputProps extends FormItemProps {
 	type?: 'text' | 'number' | 'password' | 'select' | 'upload' | 'multiselect';
@@ -42,6 +42,7 @@ const AntdFormInput: FC<AntdFormInputProps> = ({
 			case 'number':
 				return (
 					<InputNumber
+						style={{ width: '100%' }}
 						disabled={disabled}
 						prefix={prefix}
 						{...numberProps}
@@ -91,7 +92,13 @@ const AntdFormInput: FC<AntdFormInputProps> = ({
 						{...uploadProps}
 					>
 						<Button
-							icon={<Icon icon="uil:image-upload" width="24" height="24" />}
+							icon={
+								<IconifyIcon
+									icon="uil:image-upload"
+									width="24"
+									height="24"
+								/>
+							}
 						>
 							{label}
 						</Button>

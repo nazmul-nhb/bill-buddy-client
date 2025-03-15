@@ -1,3 +1,4 @@
+import type { Dayjs } from 'dayjs';
 import type { DBItem } from '.';
 import type { EXPENSE_TYPES, PAYMENT_TYPES } from '../configs/constants';
 import type { ISingleUser } from './user.types';
@@ -8,7 +9,7 @@ export interface IExpenseData {
 	paymentType: (typeof PAYMENT_TYPES)[number];
 	cost: number;
 	receipt?: File;
-	originalTime: string;
+	originalTime: string | Dayjs;
 }
 
 export interface IExpenseDetails extends DBItem, Omit<IExpenseData, 'receipt'> {

@@ -1,5 +1,4 @@
-import { Icon } from '@iconify/react';
-import { Button, Flex, Popconfirm, Spin, Tag, Tooltip } from 'antd';
+import { Button, Flex, Popconfirm, Spin, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { capitalizeString } from 'nhb-toolbox';
 import { Fragment, useState } from 'react';
@@ -7,15 +6,17 @@ import {
 	useDeleteExpenseMutation,
 	useGetAllExpensesQuery,
 } from '../../../app/api/expenseApi';
+import AntdImage from '../../../components/AntdImage';
 import AntdTable from '../../../components/AntdTable';
+import CommonDrawer from '../../../components/CommonDrawer';
+import IconifyIcon from '../../../components/IconifyIcon';
 import { useNotifyResponse } from '../../../hooks/useNotifyResponse';
-import { useTheme } from '../../../hooks/useTheme';
 import type { IExpenseDetails } from '../../../types/expense.types';
 import { formatDateTimeDynamic, getTimeStamp } from '../../../utils/dates';
-import { generateFilters } from '../../../utils/helpers';
+import { generateFilters, getImageLink } from '../../../utils/helpers';
+import ExpenseForm from './ExpenseForm';
 
 const ExpenseTable = () => {
-	const { isDarkTheme } = useTheme();
 	const { handleError, handleSuccess } = useNotifyResponse();
 
 	const [isDrawerVisible, setDrawerVisible] = useState(false);
@@ -29,8 +30,6 @@ const ExpenseTable = () => {
 			}),
 		}
 	);
-
-	console.log(expenses);
 
 	const [selectedExpenseId, setSelectedExpenseId] = useState<string>('');
 
@@ -48,9 +47,14 @@ const ExpenseTable = () => {
 		}
 	};
 
-	// console.log({ data, queryParams });
-
-	const ExpensesColumn: ColumnsType<IExpenseDetails> = [
+	const ExpensesColumn: ColumnsType<IExpenseDetails & { index: number }> = [
+		{
+			title: 'SL',
+			dataIndex: 'index',
+			key: 'index',
+			sorter: (a, b) => a.index - b.index,
+			render: (index: number) => String(index).padStart(6, '0'),
+		},
 		{
 			title: 'Items',
 			dataIndex: 'items',
@@ -76,6 +80,21 @@ const ExpenseTable = () => {
 			key: 'cost',
 			sorter: (a, b) => a.cost - b.cost,
 			render: (cost: number) => <span>৳ {cost}</span>,
+		},
+		{
+			title: 'Receipt',
+			dataIndex: 'receipt',
+			key: 'receipt',
+			render: (_, expense) =>
+				expense.receipt ? (
+					<AntdImage
+						width={80}
+						src={getImageLink(expense.receipt)}
+						alt={expense.items}
+					/>
+				) : (
+					'N/A'
+				),
 		},
 		{
 			title: 'Payment Type',
@@ -105,7 +124,7 @@ const ExpenseTable = () => {
 			sorter: (a, b) => a.createdBy.name.localeCompare(b.createdBy.name),
 		},
 		{
-			title: 'Original Time',
+			title: 'Expense Time',
 			dataIndex: 'originalTime',
 			key: 'originalTime',
 			render: (originalTime: string) => formatDateTimeDynamic(originalTime),
@@ -129,57 +148,56 @@ const ExpenseTable = () => {
 			title: 'Actions',
 			dataIndex: '_id',
 			key: '_id',
-			render: (id: string) => {
+			render: (id: string, expense) => {
 				return (
 					<Fragment key={id}>
 						<Flex align="center" gap={4}>
 							{/* Update Button */}
-							<Tooltip title="Update Expense">
-								<Button
-									color="green"
-									type="text"
-									variant="text"
-									icon={<Icon icon="bx:edit" width={24} />}
-									onClick={() => {
-										setSelectedExpenseId(id);
-										setDrawerVisible(true);
-									}}
-								/>
-							</Tooltip>
+							<Button
+								color="green"
+								type="text"
+								variant="text"
+								icon={<IconifyIcon icon="bx:edit" width={24} />}
+								onClick={() => {
+									setSelectedExpenseId(id);
+									setDrawerVisible(true);
+								}}
+							/>
 
 							{/* Delete Button */}
-							<Tooltip title="Delete Expense">
-								<Popconfirm
-									onConfirm={() => handleDeleteExpense(id)}
-									okText="Yes"
-									cancelText="No"
-									placement="topRight"
-									title="Delete the Expense?"
-									description="Are you sure to delete this expense?"
-								>
-									<Button
-										danger
-										type="text"
-										icon={<Icon icon="mi:delete" width={24} />}
-									/>
-								</Popconfirm>
-							</Tooltip>
+							<Popconfirm
+								onConfirm={() => handleDeleteExpense(id)}
+								okText="Yes"
+								cancelText="No"
+								placement="topRight"
+								title="Delete the Expense?"
+								description="Are you sure to delete this expense?"
+							>
+								<Button
+									danger
+									type="text"
+									icon={<IconifyIcon icon="mi:delete" width={24} />}
+								/>
+							</Popconfirm>
 						</Flex>
-
-						{/* <CommonDrawer
-							title="Add New Expense"
-							visible={isDrawerVisible}
-							onClose={() => {
-								setDrawerVisible(false);
-								setSelectedExpenseId('');
-							}}
-						>
-							<UpdateExpense
-								id={selectedExpenseId}
-								setDrawerVisible={setDrawerVisible}
-								setSelectedExpenseId={setSelectedExpenseId}
-							/>
-						</CommonDrawer> */}
+						{expenses && (
+							<CommonDrawer
+								key={expense._id}
+								title="Add New Expense"
+								visible={isDrawerVisible}
+								onClose={() => {
+									setSelectedExpenseId('');
+									setDrawerVisible(false);
+								}}
+							>
+								<ExpenseForm
+									key={expense._id}
+									id={selectedExpenseId}
+									setDrawerVisible={setDrawerVisible}
+									setSelectedExpenseId={setSelectedExpenseId}
+								/>
+							</CommonDrawer>
+						)}
 					</Fragment>
 				);
 			},
@@ -198,9 +216,9 @@ const ExpenseTable = () => {
 		<Fragment>
 			<AntdTable
 				bordered
-				data={expenses}
+				data={expenses?.map((expense, idx) => ({ ...expense, index: idx + 1 }))}
 				columns={ExpensesColumn}
-				excludedFields={['updatedAt', 'createdBy']}
+				excludedFields={['updatedAt', 'createdAt', 'createdBy']}
 				searchPlaceholder="Search Expense"
 			/>
 		</Fragment>

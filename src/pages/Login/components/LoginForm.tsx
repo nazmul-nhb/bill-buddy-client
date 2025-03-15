@@ -1,9 +1,9 @@
-import { Icon } from '@iconify/react';
 import { Button, Col, Form, Row, Typography } from 'antd';
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { useLoginUserMutation } from '../../../app/api/authApi';
 import AntdFormInput from '../../../components/AntdFormInput';
+import IconifyIcon from '../../../components/IconifyIcon';
 import { useAuth } from '../../../hooks/useAuth';
 import { useNotifyResponse } from '../../../hooks/useNotifyResponse';
 import type { LocationState } from '../../../types';
@@ -66,7 +66,7 @@ const LoginForm: React.FC = () => {
 					label="Your Email"
 					name="email"
 					type="text"
-					prefix={<Icon icon="ic:round-email" width="20" height="20" />}
+					prefix={<IconifyIcon icon="ic:round-email" width="20" height="20" />}
 					rules={[
 						{ required: true, message: 'Please input your email!' },
 						{ type: 'email', message: 'Please enter a valid email!' },
@@ -81,7 +81,7 @@ const LoginForm: React.FC = () => {
 					label="Your Password"
 					name="password"
 					type="password"
-					prefix={<Icon icon="mdi:password" width="20" height="20" />}
+					prefix={<IconifyIcon icon="mdi:password" width="20" height="20" />}
 					rules={[{ required: true, message: 'Please input your password!' }]}
 				/>
 			</Row>
@@ -95,7 +95,7 @@ const LoginForm: React.FC = () => {
 							size="large"
 							style={{ width: '100%' }}
 							icon={
-								<Icon
+								<IconifyIcon
 									icon="ant-design:login-outlined"
 									width="24"
 									height="24"

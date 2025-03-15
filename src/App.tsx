@@ -1,3 +1,4 @@
+import '@ant-design/v5-patch-for-react-19';
 import { App, ConfigProvider } from 'antd';
 import { useRef } from 'react';
 import { BrowserRouter } from 'react-router';
@@ -5,7 +6,6 @@ import { useTheme } from './hooks/useTheme';
 import { processNotifications } from './lib/notifications';
 import { AppRoutes } from './routes';
 import type { TNotifications } from './types';
-import '@ant-design/v5-patch-for-react-19';
 
 /**
  * Use modified `antd` notification methods as `toast`, `notify` and `showModal`.
@@ -28,7 +28,26 @@ const RootApp = () => {
 	return (
 		<ConfigProvider
 			getPopupContainer={() => modalContainerRef.current as HTMLElement}
-			theme={{ algorithm }}
+			theme={{
+				algorithm,
+				components: {
+					Table: {
+						algorithm: true,
+					},
+					Result: {
+						algorithm: true,
+					},
+					Button: {
+						algorithm: true,
+					},
+					Input: {
+						paddingContentVertical: 12,
+						paddingContentHorizontal: 8,
+						activeBg: '#141414',
+						algorithm: true,
+					},
+				},
+			}}
 		>
 			<App
 				notification={{

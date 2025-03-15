@@ -27,7 +27,10 @@ export const expenseApi = baseApi.injectEndpoints({
 			providesTags: ['Expenses'],
 		}),
 
-		getSingleExpense: builder.query<IServerResponse<IExpenseDetails>, string>({
+		getSingleExpense: builder.query<
+			IServerResponse<IExpenseDetails>,
+			string | undefined
+		>({
 			query: (id) => ({
 				url: `expenses/`.concat(id!),
 				method: 'GET',

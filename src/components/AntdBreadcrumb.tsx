@@ -1,7 +1,7 @@
-import { Icon } from '@iconify/react';
 import { Breadcrumb } from 'antd';
 import { convertStringCase } from 'nhb-toolbox';
 import { Link, useLocation } from 'react-router';
+import IconifyIcon from './IconifyIcon';
 
 const AntdBreadcrumb = () => {
 	const location = useLocation();
@@ -11,7 +11,7 @@ const AntdBreadcrumb = () => {
 		{
 			title: (
 				<Link to="/">
-					<Icon icon="line-md:home-twotone" width="20" height="20" />
+					<IconifyIcon icon="line-md:home-twotone" width="20" height="20" />
 				</Link>
 			),
 		},
@@ -40,7 +40,11 @@ const AntdBreadcrumb = () => {
 		<Breadcrumb
 			items={breadcrumbs}
 			separator={
-				<Icon icon="fluent:ios-arrow-right-24-filled" width="12" height="12" />
+				<IconifyIcon
+					icon="fluent:ios-arrow-right-24-filled"
+					width="12"
+					height="12"
+				/>
 			}
 		/>
 	);

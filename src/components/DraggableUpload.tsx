@@ -1,8 +1,8 @@
-import { Icon } from '@iconify/react';
 import { Col, Form, Upload, type ColProps } from 'antd';
 import type { FormItemProps } from 'antd/es/form';
 import type { UploadListType, UploadProps } from 'antd/es/upload/interface';
 import React from 'react';
+import IconifyIcon from './IconifyIcon';
 
 interface Props extends FormItemProps {
 	label: string;
@@ -40,7 +40,7 @@ const DraggableUpload: React.FC<Props> = ({
 					beforeUpload={() => false}
 					{...uploadProps}
 				>
-					<Icon icon="uil:image-upload" width="32" height="32" />
+					<IconifyIcon icon="uil:image-upload" width="32" height="32" />
 					<p>Click or drag an image file to this area</p>
 				</Upload.Dragger>
 			</Form.Item>

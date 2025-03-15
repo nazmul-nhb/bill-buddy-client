@@ -1,7 +1,7 @@
-import { Icon } from '@iconify/react';
 import type { ItemType, MenuItemType } from 'antd/es/menu/interface';
 import type { ReactNode } from 'react';
 import { NavLink, Route } from 'react-router';
+import IconifyIcon from '../components/IconifyIcon';
 import type { IRoute } from '../types/routes.types';
 
 /**
@@ -56,7 +56,7 @@ export function formatRoutes(
 						key: parentPath + parentPath,
 						...(output === 'menu' && {
 							icon: route.icon ? (
-								<Icon icon={route.icon} width="24" height="24" />
+								<IconifyIcon icon={route.icon} width="24" height="24" />
 							) : undefined,
 						}),
 						label: route.element ? (
@@ -75,7 +75,7 @@ export function formatRoutes(
 					key: fullPath + parentPath,
 					...(output === 'menu' && {
 						icon: route.icon ? (
-							<Icon icon={route.icon} width="24" height="24" />
+							<IconifyIcon icon={route.icon} width="24" height="24" />
 						) : undefined,
 					}),
 					label: route.element ? (

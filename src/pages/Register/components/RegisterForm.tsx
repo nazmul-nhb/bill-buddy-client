@@ -1,4 +1,3 @@
-import { Icon } from '@iconify/react';
 import { Button, Col, Form, Row, Typography, type FormProps } from 'antd';
 import React, { useEffect } from 'react';
 import { convertIntoFormData } from 'nhb-toolbox';
@@ -9,6 +8,7 @@ import DraggableUpload from '../../../components/DraggableUpload';
 import { useAuth } from '../../../hooks/useAuth';
 import { useNotifyResponse } from '../../../hooks/useNotifyResponse';
 import type { IRegisterUser } from '../../../types/user.types';
+import IconifyIcon from '../../../components/IconifyIcon';
 
 const RegisterForm: React.FC = () => {
 	const { user } = useAuth();
@@ -69,7 +69,7 @@ const RegisterForm: React.FC = () => {
 					colProps={{ xs: 24, md: 12 }}
 					label="Name"
 					name="name"
-					prefix={<Icon icon="majesticons:user" width="20" height="20" />}
+					prefix={<IconifyIcon icon="majesticons:user" width="20" height="20" />}
 					rules={[{ required: true, message: 'Please input your name!' }]}
 				/>
 				<AntdFormInput
@@ -77,7 +77,7 @@ const RegisterForm: React.FC = () => {
 					label="Email"
 					name="email"
 					type="text"
-					prefix={<Icon icon="ic:round-email" width="20" height="20" />}
+					prefix={<IconifyIcon icon="ic:round-email" width="20" height="20" />}
 					rules={[
 						{ required: true, type: 'email', message: 'Enter a valid email!' },
 					]}
@@ -90,7 +90,7 @@ const RegisterForm: React.FC = () => {
 					label="Password"
 					name="password"
 					type="password"
-					prefix={<Icon icon="mdi:password" width="20" height="20" />}
+					prefix={<IconifyIcon icon="mdi:password" width="20" height="20" />}
 					rules={[{ required: true, min: 6, message: 'At least 6 characters' }]}
 				/>
 				<AntdFormInput
@@ -98,7 +98,7 @@ const RegisterForm: React.FC = () => {
 					label="Confirm Password"
 					name="confirm_password"
 					type="password"
-					prefix={<Icon icon="mdi:password" width="20" height="20" />}
+					prefix={<IconifyIcon icon="mdi:password" width="20" height="20" />}
 					rules={[
 						{ required: true, message: 'Please confirm your password!' },
 						({ getFieldValue }) => ({
@@ -136,7 +136,11 @@ const RegisterForm: React.FC = () => {
 							size="large"
 							style={{ width: '100%' }}
 							icon={
-								<Icon icon="mdi:register-outline" width="24" height="24" />
+								<IconifyIcon
+									icon="mdi:register-outline"
+									width="24"
+									height="24"
+								/>
 							}
 						>
 							Register
