@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react';
 import { Breadcrumb } from 'antd';
-import { capitalizeString } from 'nhb-toolbox';
+import { convertStringCase } from 'nhb-toolbox';
 import { Link, useLocation } from 'react-router';
 
 const AntdBreadcrumb = () => {
@@ -24,18 +24,14 @@ const AntdBreadcrumb = () => {
 					key: title,
 					title: (
 						<Link to={path}>
-							{capitalizeString(title.replace(/-/g, ' '), {
-								capitalizeEachFirst: true,
-							})}
+							{convertStringCase(title.replace(/-/g, ' '), 'Title Case')}
 						</Link>
 					),
 				};
 			}
 			return {
 				key: title,
-				title: capitalizeString(title.replace(/-/g, ' '), {
-					capitalizeEachFirst: true,
-				}),
+				title: convertStringCase(title.replace(/-/g, ' '), 'Title Case'),
 			};
 		}),
 	];
