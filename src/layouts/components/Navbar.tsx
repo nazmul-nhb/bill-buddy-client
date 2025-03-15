@@ -1,4 +1,4 @@
-import { Avatar, Button, Flex, Menu, Popover, Space, Spin } from 'antd';
+import { Avatar, Button, Flex, Popover, Space, Spin } from 'antd';
 import { Header } from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, { useState } from 'react';
@@ -52,13 +52,8 @@ const Navbar: React.FC<Props> = ({ isDarkTheme }) => {
 				backgroundColor: isDarkTheme ? '#141414' : '#727272',
 			}}
 		>
-			<Flex
-				align="center"
-				justify={isMobile ? 'space-between' : 'flex-start'}
-				gap={12}
-				style={{ paddingTop: 8 }}
-			>
-				<Flex style={{}} align="center">
+			<Flex align="center" justify="space-between" gap={12} style={{ paddingTop: 8 }}>
+				<Flex align="center">
 					{isMobile ? (
 						<Button
 							onClick={() => setOpen(true)}
@@ -93,133 +88,80 @@ const Navbar: React.FC<Props> = ({ isDarkTheme }) => {
 						</Title>
 					</Link>
 				</Flex>
-				<Flex
-					justify={isMobile ? 'flex-end' : 'space-between'}
-					align="center"
-					style={{ width: '100%' }}
-				>
-					{!isMobile ? (
-						<Menu
-							style={{
-								backgroundColor: isDarkTheme ? '#141414' : '#727272',
-								borderBottom: 0,
-							}}
-							theme={isDarkTheme ? 'dark' : 'light'}
-							mode="horizontal"
-							disabledOverflow
-							overflowedIndicator={<IconifyIcon icon="mdi:menu" />}
-							// openKeys={[selectedPath]}
-						/>
-					) : null}
-
-					<Flex gap={8} align="center">
-						{/* {algorithm === theme.defaultAlgorithm ? (
+				<Flex gap={8} align="center" justify="end">
+					{isLoading ? (
+						<Spin />
+					) : user ? (
+						<Popover
+							trigger="click"
+							placement="bottomRight"
+							content={
+								<Space direction="vertical">
+									<Button
+										type="primary"
+										icon={
+											<IconifyIcon
+												icon="raphael:user"
+												width="24"
+												height="24"
+											/>
+										}
+										onClick={() => navigate('/profile')}
+										style={{
+											font: '18px bold',
+										}}
+									>
+										Profile
+									</Button>
+									<Button
+										type="primary"
+										color="red"
+										danger
+										icon={
+											<IconifyIcon
+												icon="mdi:logout"
+												width="24"
+												height="24"
+											/>
+										}
+										onClick={handleLogOut}
+										style={{
+											font: '18px bold',
+										}}
+									>
+										Logout
+									</Button>
+								</Space>
+							}
+						>
 							<Button
-								onClick={() => dispatch(setTheme('dark'))}
+								type="link"
+								size="large"
+								shape="circle"
 								icon={
-									<IconifyIcon
-										icon="mdi:moon-and-stars"
-										width="24"
-										height="24"
+									<Avatar
+										alt={user.name}
+										src={getImageLink(user.image)}
 									/>
 								}
-								style={{ borderWidth: 0 }}
-								type="default"
-								shape="circle"
 							/>
-						) : (
+						</Popover>
+					) : (
+						<Link to="login">
 							<Button
-								onClick={() => dispatch(setTheme('light'))}
+								type="primary"
+								title="Login"
+								color="green"
+								shape="default"
 								icon={
-									<IconifyIcon
-										icon="ant-design:sun-outlined"
-										width="24"
-										height="24"
-									/>
+									<IconifyIcon icon="mdi:lock" width="18" height="18" />
 								}
-								style={{ borderWidth: 0 }}
-								type="default"
-								shape="circle"
-							/>
-						)} */}
-						{isLoading ? (
-							<Spin />
-						) : user ? (
-							<Popover
-								trigger="click"
-								placement="bottomRight"
-								content={
-									<Space direction="vertical">
-										<Button
-											type="primary"
-											icon={
-												<IconifyIcon
-													icon="raphael:user"
-													width="24"
-													height="24"
-												/>
-											}
-											onClick={() => navigate('/profile')}
-											style={{
-												font: '18px bold',
-											}}
-										>
-											Profile
-										</Button>
-										<Button
-											type="primary"
-											color="red"
-											danger
-											icon={
-												<IconifyIcon
-													icon="mdi:logout"
-													width="24"
-													height="24"
-												/>
-											}
-											onClick={handleLogOut}
-											style={{
-												font: '18px bold',
-											}}
-										>
-											Logout
-										</Button>
-									</Space>
-								}
+								style={{ font: '18px bold' }}
 							>
-								<Button
-									type="link"
-									size="large"
-									shape="circle"
-									icon={
-										<Avatar
-											alt={user.name}
-											src={getImageLink(user.image)}
-										/>
-									}
-								/>
-							</Popover>
-						) : (
-							<Link to="login">
-								<Button
-									type="primary"
-									title="Login"
-									color="green"
-									shape="default"
-									icon={
-										<IconifyIcon
-											icon="mdi:lock"
-											width="18"
-											height="18"
-										/>
-									}
-									style={{ font: '18px bold' }}
-								>
-									{isMobile || 'Login'}
-								</Button>
-							</Link>
-						)}
-					</Flex>
+								{isMobile || 'Login'}
+							</Button>
+						</Link>
+					)}
 				</Flex>
 			</Flex>
 		</Header>

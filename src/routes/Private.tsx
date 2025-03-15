@@ -1,10 +1,10 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router';
 import { useAuth } from '../hooks/useAuth';
-import type { ISingleUser } from '../types/user.types';
+import type { TUserRole } from '../types/user.types';
 
 interface Props {
-	roles: ISingleUser['role'][];
+	roles: TUserRole[];
 	children: React.ReactNode;
 }
 

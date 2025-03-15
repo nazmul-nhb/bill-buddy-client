@@ -1,21 +1,24 @@
-import { Menu } from 'antd';
+import { Menu, Tooltip } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import Title from 'antd/es/typography/Title';
 import React from 'react';
 import { routes } from '../../configs/route_list';
-import { configs } from '../../configs/site_configs';
+import { useAuth } from '../../hooks/useAuth';
 import { useGetSelectedPath } from '../../hooks/useSelectedPath';
 import { formatRoutes } from '../../utils/routeUtils';
-// import { useAuth } from '../../hooks/useAuth';
 
 interface Props {
 	isDarkTheme: boolean;
 }
 
 const Sidebar: React.FC<Props> = ({ isDarkTheme }) => {
-	// const { user } = useAuth();
+	const { user } = useAuth();
 
 	const { selectedPath, selectCurrentPath } = useGetSelectedPath();
+
+	if (!user) {
+		return;
+	}
 
 	return (
 		<Sider
@@ -28,15 +31,17 @@ const Sidebar: React.FC<Props> = ({ isDarkTheme }) => {
 			trigger={false}
 		>
 			<Title
+				ellipsis
 				style={{
-					textAlign: 'center',
-					paddingTop: 16,
+					textAlign: 'left',
+					padding: '16px 0 0 8px',
 					textWrap: 'nowrap',
 				}}
-				level={3}
-				title={configs.site_title}
+				level={5}
 			>
-				{configs.site_title}
+				<Tooltip arrow={{ pointAtCenter: false }} title={user.name}>
+					Welcome {user.name}
+				</Tooltip>
 			</Title>
 			{/* Make the menu scrollable independently */}
 			<div

@@ -1,5 +1,5 @@
 import { Checkbox, DatePicker, Flex, Input, Pagination, Table } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import { type ColumnsType, type TableProps } from 'antd/es/table';
 import Title from 'antd/es/typography/Title';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
@@ -10,7 +10,7 @@ import type { DBItem } from '../types';
 
 dayjs.extend(isBetween);
 
-interface Props<T> {
+interface Props<T> extends TableProps<T> {
 	data?: T[];
 	excludedFields?: (keyof T)[];
 	columns: ColumnsType<T>;
@@ -22,15 +22,16 @@ const AntdTable = <T extends object & DBItem>({
 	columns,
 	searchPlaceholder,
 	excludedFields,
+	...props
 }: Props<T>) => {
 	const [searchText, setSearchText] = useState<string>('');
 	const [currentPage, setCurrentPage] = useState<number>(1);
-	const [pageSize] = useState<number>(6);
+	const [pageSize] = useState<number>(40);
 	const [dateRange, setDateRange] = useState<[Dayjs, Dayjs] | null>(null);
 	const [selectedColumns, setSelectedColumns] = useState<(keyof T)[]>(() => {
 		const allColumns = columns.map((col) => col.key as keyof T);
 		const defaultExcluded = ['createdAt', 'updatedAt'] as (keyof T)[];
-		const excludedSet = new Set([...(excludedFields || []), ...defaultExcluded]);
+		const excludedSet = new Set(excludedFields ? excludedFields : defaultExcluded);
 
 		return allColumns.filter((key) => !excludedSet.has(key));
 	});
@@ -140,6 +141,7 @@ const AntdTable = <T extends object & DBItem>({
 				dataSource={paginatedData}
 				pagination={false}
 				scroll={{ x: 'max-content' }}
+				{...props}
 			/>
 		</React.Fragment>
 	);

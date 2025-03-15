@@ -38,16 +38,29 @@ export const getImageLink = (src: string, baseUrl?: string): string => {
  * Generates unique filters from a given dataset.
  * @param data The dataset to extract unique filter values from.
  * @param key The key in the dataset to extract unique values.
+ * @param valueExtractor Function to extract a valid key from the object.
  * @returns An array of filter objects for Ant Design Table.
  */
-export const generateFilters = <T>(data: T[], key: keyof T) => {
-	const uniqueValues = Array.from(new Set(data?.map((item) => item[key]))).filter(
-		(val) => val !== null && val !== undefined
+export const generateFilters = <T, K extends keyof T>(
+	data: T[],
+	key: K,
+	valueExtractor?: (item: T[K]) => string | number
+) => {
+	const uniqueValues = Array.from(
+		new Set(
+			data
+				?.map((item) =>
+					valueExtractor
+						? valueExtractor(item[key])
+						: (item[key] as unknown as string | number)
+				)
+				?.filter((val) => val !== null && val !== undefined)
+		)
 	);
 
 	return uniqueValues?.map((value) => ({
-		text: typeof value === 'boolean' ? (value === true ? 'Yes' : 'No') : String(value),
-		value: value,
+		text: typeof value === 'boolean' ? (value ? 'Yes' : 'No') : String(value),
+		value,
 	}));
 };
 
