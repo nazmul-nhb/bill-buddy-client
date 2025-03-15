@@ -1,12 +1,15 @@
+import { AntNotifications } from '../App';
 import type { IErrorResponse, IServerResponse } from '../types/server.types';
 import { isFetchError } from '../utils/helpers';
 
 /** Show Notifications/toasts based on API responses */
 export const useNotifyResponse = () => {
+	const { toastify, notify } = AntNotifications(true);
+
 	/** - Handles successful API responses and shows notifications */
 	const handleSuccess = <T extends IServerResponse<unknown>>(response: T) => {
 		if (response?.success) {
-			// toastify.success(response.message || 'Operation successful!');
+			toastify.success(response.message || 'Operation successful!');
 		}
 	};
 
@@ -24,8 +27,8 @@ export const useNotifyResponse = () => {
 		} else {
 			console.error('Unknown Error:', error);
 		}
-		console.error(errorMessage);
-		// notify.error({ message: errorMessage });
+
+		notify.error({ message: errorMessage });
 	};
 
 	return { handleSuccess, handleError };

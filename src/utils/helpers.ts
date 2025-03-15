@@ -35,7 +35,7 @@ export const getImageLink = (src: string, baseUrl?: string): string => {
 };
 
 /**
- * * Generates unique filters from a given dataset.
+ * Generates unique filters from a given dataset.
  * @param data The dataset to extract unique filter values from.
  * @param key The key in the dataset to extract unique values.
  * @returns An array of filter objects for Ant Design Table.
@@ -73,7 +73,7 @@ export const isFetchError = (error: unknown): error is FetchBaseQueryError => {
 };
 
 /**
- * * Customize Badge style
+ * * Customize Antd Badge style
  * @param isGreen Whether the badge should be green or red.
  * @param top Top margin for the badge.
  * @returns Badge style object.
