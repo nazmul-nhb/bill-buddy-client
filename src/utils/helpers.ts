@@ -3,6 +3,7 @@ import { jwtDecode } from 'jwt-decode';
 import type { CSSProperties } from 'react';
 import { configs } from '../configs/site_configs';
 import type { IDecodedUser } from '../types/user.types';
+import type { UploadPreview } from '../types';
 
 /**
  * Play a short sound effect.
@@ -69,7 +70,7 @@ export const generateFilters = <T, K extends keyof T>(
  * @param src Image source, can be only the cloudinary public name for image like `"v1737848641/filename.jpg"`
  * @returns Prepared image for preview as an array of object.
  */
-export const previewAntdImage = (src: string) => {
+export const previewAntdImage = (src: string): UploadPreview[] => {
 	return [
 		{
 			uid: '-1',

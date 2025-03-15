@@ -1,7 +1,7 @@
 import { Button, Col, DatePicker, Flex, Form, Row, Spin, type FormProps } from 'antd';
-import dayjs, { type Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import { capitalizeString, convertIntoFormData, extractUpdatedFields } from 'nhb-toolbox';
-import React, { useEffect, type Dispatch, type SetStateAction } from 'react';
+import React, { useEffect, useMemo, type Dispatch, type SetStateAction } from 'react';
 import {
 	useCreateExpenseMutation,
 	useGetSingleExpenseQuery,
@@ -12,6 +12,7 @@ import DraggableUpload from '../../../components/DraggableUpload';
 import IconifyIcon from '../../../components/IconifyIcon';
 import { EXPENSE_TYPES, PAYMENT_TYPES } from '../../../configs/constants';
 import { useNotifyResponse } from '../../../hooks/useNotifyResponse';
+import type { UploadPreview } from '../../../types';
 import { type IExpenseData } from '../../../types/expense.types';
 import { previewAntdImage } from '../../../utils/helpers';
 
@@ -37,51 +38,57 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({
 	const [createExpense, { isLoading }] = useCreateExpenseMutation();
 	const [updateExpense, { isLoading: isUpdateLoading }] = useUpdateExpenseMutation();
 
+	const previousData: Partial<IExpenseData> = useMemo(
+		() => ({
+			items: expenseData?.data?.items,
+			cost: expenseData?.data?.cost,
+			originalTime: dayjs(expenseData?.data?.originalTime),
+			expenseType: expenseData?.data?.expenseType,
+			paymentType: expenseData?.data?.paymentType,
+			receipt: expenseData?.data?.receipt
+				? previewAntdImage(expenseData?.data?.receipt)
+				: undefined,
+		}),
+		[expenseData?.data]
+	);
+
 	useEffect(() => {
 		if (expenseData?.data) {
-			expenseForm.setFieldsValue({
-				...expenseData.data,
-				originalTime: expenseData.data.originalTime
-					? dayjs(expenseData.data.originalTime)
-					: undefined,
-
-				receipt: expenseData.data.receipt
-					? previewAntdImage(expenseData.data.receipt)
-					: undefined,
-			});
+			expenseForm.setFieldsValue(previousData);
 		}
-	}, [expenseData?.data, expenseForm]);
+	}, [expenseData?.data, expenseForm, previousData]);
 
 	/** Handles form submission */
 	const handleSubmit: FormProps<IExpenseData>['onFinish'] = async (data) => {
+		data.originalTime = dayjs(data.originalTime).toISOString();
+
 		if (expenseData?.data && id && setDrawerVisible && setSelectedExpenseId) {
-			const { receipt, ...withoutReceipt } = data;
+			previousData.originalTime = dayjs(previousData.originalTime).toISOString();
 
-			withoutReceipt.originalTime = (data.originalTime as Dayjs).toISOString();
+			const updated = extractUpdatedFields(previousData, data);
 
-			const updated = extractUpdatedFields(expenseData.data, withoutReceipt);
-
-			console.log(updated);
-
-			if (receipt) {
-				(updated as IExpenseData).receipt = receipt;
+			if (!updated.receipt || !(updated.receipt as UploadPreview[]).length) {
+				delete updated.receipt;
 			}
 
 			try {
-				const preparedData = convertIntoFormData(updated);
+				const updatedData = convertIntoFormData(updated);
 
 				const upRes = await updateExpense({
 					id,
-					data: preparedData,
+					data: updatedData,
 				}).unwrap();
 
 				if (upRes.success) {
 					handleSuccess(upRes);
+					expenseForm.resetFields();
 					setDrawerVisible(false);
 					setSelectedExpenseId('');
 				}
 			} catch (error) {
 				handleError(error);
+			} finally {
+				// expenseForm.resetFields();
 			}
 		} else {
 			try {
@@ -89,14 +96,13 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({
 					delete data.receipt;
 				}
 
-				data.originalTime = (data.originalTime as Dayjs).toISOString();
-
 				const formattedData = convertIntoFormData(data);
 
 				const res = await createExpense(formattedData).unwrap();
 
 				if (res.success) {
 					handleSuccess(res);
+					expenseForm.resetFields();
 				}
 			} catch (error) {
 				handleError(error);
@@ -111,6 +117,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({
 			</Flex>
 		);
 	}
+
 	return (
 		<Form
 			key={id}

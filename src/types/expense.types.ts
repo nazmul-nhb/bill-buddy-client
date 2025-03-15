@@ -1,6 +1,6 @@
 import type { Dayjs } from 'dayjs';
-import type { DBItem } from '.';
 import type { EXPENSE_TYPES, PAYMENT_TYPES } from '../configs/constants';
+import type { DBItem, UploadPreview } from './index';
 import type { ISingleUser } from './user.types';
 
 export interface IExpenseData {
@@ -8,7 +8,7 @@ export interface IExpenseData {
 	expenseType: (typeof EXPENSE_TYPES)[number];
 	paymentType: (typeof PAYMENT_TYPES)[number];
 	cost: number;
-	receipt?: File;
+	receipt?: File | UploadPreview[];
 	originalTime: string | Dayjs;
 }
 
