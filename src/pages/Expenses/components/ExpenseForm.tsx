@@ -1,6 +1,11 @@
 import { Button, Col, DatePicker, Flex, Form, Row, Spin, type FormProps } from 'antd';
 import dayjs from 'dayjs';
-import { capitalizeString, convertIntoFormData, extractUpdatedFields } from 'nhb-toolbox';
+import {
+	capitalizeString,
+	convertIntoFormData,
+	createControlledFormData,
+	extractUpdatedFields,
+} from 'nhb-toolbox';
 import React, { useEffect, useMemo, type Dispatch, type SetStateAction } from 'react';
 import {
 	useCreateExpenseMutation,
@@ -12,7 +17,6 @@ import DraggableUpload from '../../../components/DraggableUpload';
 import IconifyIcon from '../../../components/IconifyIcon';
 import { EXPENSE_TYPES, PAYMENT_TYPES } from '../../../configs/constants';
 import { useNotifyResponse } from '../../../hooks/useNotifyResponse';
-import type { UploadPreview } from '../../../types';
 import { type IExpenseData } from '../../../types/expense.types';
 import { previewAntdImage } from '../../../utils/helpers';
 
@@ -38,13 +42,13 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({
 	const [createExpense, { isLoading }] = useCreateExpenseMutation();
 	const [updateExpense, { isLoading: isUpdateLoading }] = useUpdateExpenseMutation();
 
-	const previousData: Partial<IExpenseData> = useMemo(
+	const previousData: IExpenseData = useMemo(
 		() => ({
-			items: expenseData?.data?.items,
-			cost: expenseData?.data?.cost,
-			originalTime: dayjs(expenseData?.data?.originalTime),
-			expenseType: expenseData?.data?.expenseType,
-			paymentType: expenseData?.data?.paymentType,
+			items: expenseData?.data?.items ?? '',
+			cost: expenseData?.data?.cost ?? 0,
+			originalTime: dayjs(expenseData?.data?.originalTime ?? ''),
+			expenseType: expenseData?.data?.expenseType ?? 'accessories',
+			paymentType: expenseData?.data?.paymentType ?? 'cash',
 			receipt: expenseData?.data?.receipt
 				? previewAntdImage(expenseData?.data?.receipt)
 				: undefined,
@@ -67,12 +71,8 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({
 
 			const updated = extractUpdatedFields(previousData, data);
 
-			if (!updated.receipt || !(updated.receipt as UploadPreview[]).length) {
-				delete updated.receipt;
-			}
-
 			try {
-				const updatedData = convertIntoFormData(updated);
+				const updatedData = createControlledFormData(updated);
 
 				const upRes = await updateExpense({
 					id,
@@ -92,10 +92,6 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({
 			}
 		} else {
 			try {
-				if (!data.receipt) {
-					delete data.receipt;
-				}
-
 				const formattedData = convertIntoFormData(data);
 
 				const res = await createExpense(formattedData).unwrap();

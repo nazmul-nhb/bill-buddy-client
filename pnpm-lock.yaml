@@ -27,8 +27,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0
       nhb-toolbox:
-        specifier: ^2.3.8
-        version: 2.3.8
+        specifier: ^2.4.3
+        version: 2.4.3
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -987,8 +987,8 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  nhb-toolbox@2.3.8:
-    resolution: {integrity: sha512-Y5jn/druj6UnRXY/zBJ+UD3ska7ew8qTLYXE3+6N3T5BFpo7HkIBfYwDEqrF+Xsms5kij4F0lkjS+Gc6uxRz/Q==}
+  nhb-toolbox@2.4.3:
+    resolution: {integrity: sha512-FdKUhaOMokv6tPZlIwcVx/Iqjh3iqYvrBuq1FXsKnHi6iEzKapUlSL3w1zth0HrILNBxOMlhsp2mCiyUvmZHjw==}
 
   object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
@@ -2370,7 +2370,7 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  nhb-toolbox@2.3.8: {}
+  nhb-toolbox@2.4.3: {}
 
   object-assign@4.1.1: {}
 

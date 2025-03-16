@@ -1,14 +1,14 @@
 import { Button, Col, Form, Row, Typography, type FormProps } from 'antd';
+import { createControlledFormData } from 'nhb-toolbox';
 import React, { useEffect } from 'react';
-import { convertIntoFormData } from 'nhb-toolbox';
 import { useLocation, useNavigate } from 'react-router';
 import { useRegisterUserMutation } from '../../../app/api/authApi';
 import AntdFormInput from '../../../components/AntdFormInput';
 import DraggableUpload from '../../../components/DraggableUpload';
+import IconifyIcon from '../../../components/IconifyIcon';
 import { useAuth } from '../../../hooks/useAuth';
 import { useNotifyResponse } from '../../../hooks/useNotifyResponse';
 import type { IRegisterUser } from '../../../types/user.types';
-import IconifyIcon from '../../../components/IconifyIcon';
 
 const RegisterForm: React.FC = () => {
 	const { user } = useAuth();
@@ -31,10 +31,9 @@ const RegisterForm: React.FC = () => {
 	/** * Handles form submission */
 	const handleRegister: FormProps<IRegisterUser>['onFinish'] = async (data) => {
 		try {
-			// Sanitize and format form data
-			const { confirm_password: _, ...sanitizedData } = data;
-
-			const formattedData = convertIntoFormData(sanitizedData);
+			const formattedData = createControlledFormData(data, {
+				ignoreKeys: ['confirm_password'],
+			});
 
 			const res = await registerUser(formattedData).unwrap();
 
