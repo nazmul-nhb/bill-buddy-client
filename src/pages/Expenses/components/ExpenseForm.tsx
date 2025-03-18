@@ -66,12 +66,12 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({
 	const handleSubmit: FormProps<IExpenseData>['onFinish'] = async (data) => {
 		data.originalTime = dayjs(data.originalTime).toISOString();
 
-		if (expenseData?.data && id && setDrawerVisible && setSelectedExpenseId) {
+		if (id && expenseData?.data && setDrawerVisible && setSelectedExpenseId) {
 			previousData.originalTime = dayjs(previousData.originalTime).toISOString();
 
-			const updated = extractUpdatedFields(previousData, data);
-
 			try {
+				const updated = extractUpdatedFields(previousData, data);
+
 				const updatedData = createControlledFormData(updated);
 
 				const upRes = await updateExpense({
