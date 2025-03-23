@@ -16,7 +16,7 @@
     "antd": "^5.24.3",
     "dayjs": "^1.11.13",
     "jwt-decode": "^4.0.0",
-    "nhb-toolbox": "^2.4.6",
+    "nhb-toolbox": "^2.6.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-draggable": "^4.4.6",

@@ -1,4 +1,4 @@
-import { Button, Col, DatePicker, Flex, Form, Row, Spin, type FormProps } from 'antd';
+import { Button, Col, DatePicker, Flex, Form, Row, Spin } from 'antd';
 import dayjs from 'dayjs';
 import {
 	capitalizeString,
@@ -63,7 +63,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({
 	}, [expenseData?.data, expenseForm, previousData]);
 
 	/** Handles form submission */
-	const handleSubmit: FormProps<IExpenseData>['onFinish'] = async (data) => {
+	const handleSubmit = async (data: IExpenseData) => {
 		data.originalTime = dayjs(data.originalTime).toISOString();
 
 		if (id && expenseData?.data && setDrawerVisible && setSelectedExpenseId) {
