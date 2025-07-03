@@ -1,7 +1,7 @@
 import type { MessageInstance } from 'antd/es/message/interface';
 import type { HookAPI } from 'antd/es/modal/useModal';
 import type { NotificationInstance } from 'antd/es/notification/interface';
-import type { QueryObject } from 'nhb-toolbox/dist/object/types';
+import type { QueryObject } from 'nhb-toolbox/object/types';
 import type { Location } from 'react-router';
 
 export type TNotifications = {

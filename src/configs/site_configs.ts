@@ -5,4 +5,4 @@ export const configs = {
 	token_key: 'bill-buddy-token',
 	user_key: 'bill-buddy-user',
 	theme_name: 'bill-buddy-theme',
-};
+} as const;

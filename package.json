@@ -16,7 +16,8 @@
     "antd": "^5.24.3",
     "dayjs": "^1.11.13",
     "jwt-decode": "^4.0.0",
-    "nhb-toolbox": "^3.0.0",
+    "nhb-hooks": "^1.12.1",
+    "nhb-toolbox": "^4.12.67",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-draggable": "^4.4.6",
@@ -36,7 +37,7 @@
     "typescript-eslint": "^8.24.1",
     "vite": "^6.2.0"
   },
-  "packageManager": "pnpm@10.6.2+sha512.47870716bea1572b53df34ad8647b42962bc790ce2bf4562ba0f643237d7302a3d6a8ecef9e4bdfc01d23af1969aa90485d4cebb0b9638fa5ef1daef656f6c1b",
+  "packageManager": "pnpm@10.12.4+sha512.5ea8b0deed94ed68691c9bad4c955492705c5eeb8a87ef86bc62c74a26b037b08ff9570f108b2e4dbd1dd1a9186fea925e527f141c648e85af45631074680184",
   "pnpm": {
     "onlyBuiltDependencies": [
       "@swc/core",

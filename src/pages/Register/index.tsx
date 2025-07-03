@@ -3,8 +3,11 @@ import { Content } from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React from 'react';
 import RegisterForm from './components/RegisterForm';
+import { useTitle } from 'nhb-hooks';
 
 const Register: React.FC = () => {
+	useTitle('Register');
+
 	return (
 		<Layout style={{ minHeight: '100svh' }}>
 			<Content

@@ -3,8 +3,11 @@ import { Content } from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React from 'react';
 import LoginForm from './components/LoginForm';
+import { useTitle } from 'nhb-hooks';
 
 const Login: React.FC = () => {
+	useTitle('Login');
+
 	return (
 		<Layout style={{ minHeight: '100svh' }}>
 			<Content

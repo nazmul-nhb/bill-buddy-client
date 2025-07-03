@@ -1,4 +1,5 @@
 import { Button, Card, Row } from 'antd';
+import { useTitle } from 'nhb-hooks';
 import { useState } from 'react';
 import AntdBreadcrumb from '../../components/AntdBreadcrumb';
 import CommonDrawer from '../../components/CommonDrawer';
@@ -7,6 +8,8 @@ import AddExpense from './components/ExpenseForm';
 import ExpenseTable from './components/ExpenseTable';
 
 const Expenses = () => {
+	useTitle('Expenses');
+
 	const [isDrawerVisible, setDrawerVisible] = useState(false);
 
 	return (
