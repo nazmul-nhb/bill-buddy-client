@@ -2,10 +2,14 @@ import { Breadcrumb } from 'antd';
 import { convertStringCase } from 'nhb-toolbox';
 import { Link, useLocation } from 'react-router';
 import IconifyIcon from './IconifyIcon';
+import { useTitleMeta } from 'nhb-hooks';
 
 const AntdBreadcrumb = () => {
 	const location = useLocation();
 	const pathnames = location.pathname.split('/').filter(Boolean);
+	const meta = useTitleMeta();
+
+	console.log(meta);
 
 	const breadcrumbs = [
 		{
