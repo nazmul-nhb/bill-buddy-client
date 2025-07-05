@@ -1,7 +1,7 @@
 {
   "name": "bill-buddy-client",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -17,8 +17,8 @@
     "antd": "^5.24.3",
     "dayjs": "^1.11.13",
     "jwt-decode": "^4.0.0",
-    "nhb-hooks": "^1.12.9",
-    "nhb-toolbox": "^4.12.67",
+    "nhb-hooks": "^1.13.1",
+    "nhb-toolbox": "^4.12.69",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-draggable": "^4.4.6",
@@ -34,7 +34,8 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
-    "nhb-scripts": "^0.5.10",
+    "nhb-scripts": "^1.2.7",
+    "prettier": "^3.6.2",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",
     "vite": "^6.2.0"

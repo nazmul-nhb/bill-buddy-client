@@ -27,11 +27,11 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0
       nhb-hooks:
-        specifier: ^1.12.9
-        version: 1.12.9(nhb-toolbox@4.12.67)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: ^1.13.1
+        version: 1.13.1(nhb-toolbox@4.12.69)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       nhb-toolbox:
-        specifier: ^4.12.67
-        version: 4.12.67
+        specifier: ^4.12.69
+        version: 4.12.69
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -73,8 +73,11 @@ importers:
         specifier: ^15.15.0
         version: 15.15.0
       nhb-scripts:
-        specifier: ^0.5.10
-        version: 0.5.10
+        specifier: ^1.2.7
+        version: 1.2.7
+      prettier:
+        specifier: ^3.6.2
+        version: 3.6.2
       typescript:
         specifier: ~5.7.2
         version: 5.7.3
@@ -776,6 +779,10 @@ packages:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
     engines: {node: '>=10'}
 
+  chalk@5.4.1:
+    resolution: {integrity: sha512-zgVZuo2WcZgfUEmsn6eO3kINexW8RAE4maiQ8QNs8CtpPCSyMiYsULR3HQYkm3w8FIA3SberyMJMSldGsW+U3w==}
+    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
+
   classnames@2.5.1:
     resolution: {integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==}
 
@@ -1097,6 +1104,10 @@ packages:
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
 
+  kleur@3.0.3:
+    resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
+    engines: {node: '>=6'}
+
   levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
@@ -1143,6 +1154,9 @@ packages:
     resolution: {integrity: sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==}
     engines: {node: '>=16 || 14 >=14.17'}
 
+  minimist@1.2.8:
+    resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
+
   minipass@7.1.2:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
     engines: {node: '>=16 || 14 >=14.17'}
@@ -1158,19 +1172,19 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  nhb-hooks@1.12.9:
-    resolution: {integrity: sha512-xIoX5G8j1dJljXbJrTVl5A74nIssfsZqXu5NVr6KkB+lImc1eiB2FThKIRdlkx4JWP7e/RRe3OAWQgaMTj2gfg==}
+  nhb-hooks@1.13.1:
+    resolution: {integrity: sha512-MjTfLDq7nwvcoztbs/tNwiXw4yyTianAARi2UCu04BLeRvUrlHHy9g2KE8euOALjKBfnSjLF/g8v3vJTFHB59g==}
     peerDependencies:
       nhb-toolbox: '>=4.12.67'
       react: ^18 || ^19
       react-dom: ^18 || ^19
 
-  nhb-scripts@0.5.10:
-    resolution: {integrity: sha512-lmghx0SVDS01/KvHwlF31dG6/T9qi0ygt2pYklIDZCFDQ3v6x6gRQyU3oHNhc/QJQyMvAYtPSjq8u4Q4/urkIQ==}
+  nhb-scripts@1.2.7:
+    resolution: {integrity: sha512-z6BM1DMB5eME5MJKAq+luYOJTFvjlJWM9aQHg7IFeeA2tZTnmJwhpylfry0XGbtlF5BLhjQoyrXSUGC/wBwtIw==}
     hasBin: true
 
-  nhb-toolbox@4.12.67:
-    resolution: {integrity: sha512-KZw+fphmxulntl/VQBgLTEct+KUIDTP6KcRBbghSx1130Ny86v7sd+E6zvYqX13xPeyNeUHWTgrSwVkrOa9lpw==}
+  nhb-toolbox@4.12.69:
+    resolution: {integrity: sha512-2L9UegsJ1qgY49dZ6djqWzc0CtgncKME3MenaM9QuDTTm3bVdqTDCShgx8j/WirHgfg4zN5/dBJWGqldF4cDOg==}
 
   npm-run-path@6.0.0:
     resolution: {integrity: sha512-9qny7Z9DsQU8Ou39ERsPU4OZQlSTP47ShQzuKZ6PRXpYLtIFgl/DEBYEXKlvcEa+9tHVcK8CF81Y2V72qaZhWA==}
@@ -1253,6 +1267,10 @@ packages:
 
   progress-estimator@0.3.1:
     resolution: {integrity: sha512-I5bwE35adOrA2rfZ9iHHPESUp5C6cXrZd0J8LdFD9J+66ijSugBwZHooPCROf94Ox8YZaUyvTLViqSiRvBhSoA==}
+
+  prompts@2.4.2:
+    resolution: {integrity: sha512-NxNv/kLguCA7p3jE8oL2aEBsrJWgAakBpgmgK6lpPWV+WuOmY6r2/zbAVnP+T8bQlA0nzHXSJSJW0Hq7ylaD2Q==}
+    engines: {node: '>= 6'}
 
   prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
@@ -1583,8 +1601,8 @@ packages:
   scroll-into-view-if-needed@3.1.0:
     resolution: {integrity: sha512-49oNpRjWRvnU8NyGVmUaYG4jtTkNonFZI86MmGRDqBphEK2EXT9gdEUoQPZhuBM8yWHxCWbobltqYO5M4XrUvQ==}
 
-  semver@7.7.1:
-    resolution: {integrity: sha512-hlq8tAfn0m/61p4BVRcPzIGr6LKiMwo4VM6dGi6pt4qcRkmNzTcWq6eCEjEh+qXjkMDvPlOFFSGwQjoEa6gyMA==}
+  semver@7.7.2:
+    resolution: {integrity: sha512-RF0Fw+rO5AMf9MAyaRXI4AV0Ulj5lMHqVxxdSgiVbixSCXoEmmX/jk0CuJw4+3SqroYO9VoUh+HcuJivvtJemA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -1605,6 +1623,9 @@ packages:
   signal-exit@4.1.0:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
+
+  sisteransi@1.0.5:
+    resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
 
   slash@5.1.0:
     resolution: {integrity: sha512-ZA6oR3T/pEyuqwMgAKT0/hAv8oAXckzbkmR0UkUosQ+Mc4RxGoJkRmwHgHufaenlyAgE1Mxgpdcrf75y6XcnDg==}
@@ -1703,6 +1724,11 @@ packages:
 
   typescript@5.7.3:
     resolution: {integrity: sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
+  typescript@5.8.3:
+    resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -2224,6 +2250,7 @@ snapshots:
   '@types/node@22.16.0':
     dependencies:
       undici-types: 6.21.0
+    optional: true
 
   '@types/react-dom@19.0.4(@types/react@19.0.10)':
     dependencies:
@@ -2290,7 +2317,7 @@ snapshots:
       fast-glob: 3.3.3
       is-glob: 4.0.3
       minimatch: 9.0.5
-      semver: 7.7.1
+      semver: 7.7.2
       ts-api-utils: 2.0.1(typescript@5.7.3)
       typescript: 5.7.3
     transitivePeerDependencies:
@@ -2437,6 +2464,8 @@ snapshots:
     dependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
+
+  chalk@5.4.1: {}
 
   classnames@2.5.1: {}
 
@@ -2768,6 +2797,8 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
+  kleur@3.0.3: {}
+
   levn@0.4.1:
     dependencies:
       prelude-ls: 1.2.1
@@ -2812,6 +2843,8 @@ snapshots:
     dependencies:
       brace-expansion: 2.0.1
 
+  minimist@1.2.8: {}
+
   minipass@7.1.2: {}
 
   ms@2.1.3: {}
@@ -2820,24 +2853,27 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  nhb-hooks@1.12.9(nhb-toolbox@4.12.67)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  nhb-hooks@1.13.1(nhb-toolbox@4.12.69)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
-      nhb-toolbox: 4.12.67
+      nhb-toolbox: 4.12.69
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 
-  nhb-scripts@0.5.10:
+  nhb-scripts@1.2.7:
     dependencies:
-      '@types/node': 22.16.0
-      chalk: 4.1.2
+      chalk: 5.4.1
       execa: 9.6.0
       globby: 14.1.0
-      prettier: 3.6.2
+      minimist: 1.2.8
+      nhb-toolbox: 4.12.69
       progress-estimator: 0.3.1
+      prompts: 2.4.2
       rimraf: 6.0.1
+      semver: 7.7.2
       type-fest: 4.41.0
+      typescript: 5.8.3
 
-  nhb-toolbox@4.12.67: {}
+  nhb-toolbox@4.12.69: {}
 
   npm-run-path@6.0.0:
     dependencies:
@@ -2912,6 +2948,11 @@ snapshots:
       cli-spinners: 1.3.1
       humanize-duration: 3.33.0
       log-update: 2.3.0
+
+  prompts@2.4.2:
+    dependencies:
+      kleur: 3.0.3
+      sisteransi: 1.0.5
 
   prop-types@15.8.1:
     dependencies:
@@ -3340,7 +3381,7 @@ snapshots:
     dependencies:
       compute-scroll-into-view: 3.1.1
 
-  semver@7.7.1: {}
+  semver@7.7.2: {}
 
   set-cookie-parser@2.7.1: {}
 
@@ -3353,6 +3394,8 @@ snapshots:
   signal-exit@3.0.7: {}
 
   signal-exit@4.1.0: {}
+
+  sisteransi@1.0.5: {}
 
   slash@5.1.0: {}
 
@@ -3440,7 +3483,10 @@ snapshots:
 
   typescript@5.7.3: {}
 
-  undici-types@6.21.0: {}
+  typescript@5.8.3: {}
+
+  undici-types@6.21.0:
+    optional: true
 
   unicorn-magic@0.3.0: {}
 
